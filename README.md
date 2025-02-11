@@ -5,21 +5,37 @@
 Emphasizing the **W latent space**, StyleGAN2 & 3 convert an image into a **512-dimensional latent vector**. Image inversion allows the transformation of real images into this latent space, enabling edits and fine-tuning. The models showcase high-quality image synthesis, but also exhibit challenges in **maintaining fine details and global coherence**.
 
 ### Results & Observations
-- StyleGAN2 & 3 can achieve **remarkably high-resolution images**, but they struggle with **global consistency in complex scenes**.
+- StyleGAN2 & 3 can achieve **very high-resolution images**, but they struggle with **global consistency in complex scenes**.
 - **Inversion techniques** attempt to project real images into latent space, but may **lose fine details or distort features**.
 
-| Image | Description |
-| --- | --- |
-| ![Image A](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan2/results/seed0042.png) | Image A demonstrates the abstract backgrounds usually associated with a GAN-generated image. |
-| ![Image B](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6399.png) | Image B exhibits heavy distortion issues. GANs sometimes have problems with symmetry, particularly earrings. |
-| ![Image C](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6402.png) | Image C contains an abstract exhibits issues that earrings often present for GANs. |
-| ![Image D](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6401.png) | Image D also contains a highly distorted secondary image and other distorted details. |
+| ![Image A](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed4605.png) | ![Image B](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6399.png) |
+|---|---|
+| ![Image C](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6402.png) | ![Image D](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6401.png) |
+
+### Descriptions
+- **Image A**: Demonstrates the abstract backgrounds usually associated with a GAN-generated image and other deviations.
+- **Image B**: Exhibits issues that earrings often present for GANs. GANs sometimes have problems with symmetry, particularly earrings.
+- **Image C**: Exhibits issues that earrings often present for GANs and contains an abstract background. 
+- **Image D**: Contains secondary image and other distorted details.
 
 ---
 
 ## StyleCLIP: Text-Guided GAN Editing
 
 StyleCLIP enables **text-based modifications** of GAN-generated images. It bridges **GANs and CLIP (Contrastive Language-Image Pretraining)**, leveraging natural language descriptions to steer image synthesis. This effectively introduces **text-to-image capabilities** within the GAN framework.
+
+### Inference & Inversion
+
+| ![Image good inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/dicaprio-real-life-format.jpg) | ![Image bad inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/dicaprio-training-set-format.jpg) |
+|---|---|
+| **Left: A well-inverted image.** The face closely matches the dataset's expected format, leading to an accurate reconstruction. | **Right: A poorly inverted image.** The original does not align well with the training data, causing distortions. |
+
+### **Why Inversion Struggles in Some Cases**
+- **Mismatch with training data:** GANs and diffusion models are trained mostly on **cropped, centered face images**. When given an image with a **different pose, lighting, or visible torso**, the inversion process struggles to map it correctly into latent space.  
+- **Information loss:** Since the generator was never trained to reconstruct full-body or off-center images, it **hallucinates missing details**, often leading to **unnatural distortions**.  
+- **Latent space constraints:** The model forces all inputs into a specific **512-dimensional latent representation**, which may not fully capture the complexity of real-world images outside its dataset.  
+
+
 
 ## Stable Diffusion: Robust Text-to-Image Generation
 
