@@ -44,7 +44,6 @@ Attempt to project real images into latent space, but may **lose fine details or
 |---|
 | This image shows the **original image** after exiting the **alignment process**, the output is then used to finalize **inversion process** and get the inverted image. |
 | ![Image good inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/kerum-manipulated.png) |
-|---|
 | This image shows a **well-aligned face** that successfully passed the **inversion process**. The **inverted image** is now **treated as the original** for all further manipulations. |
 
 ## [More Results](https://github.com/robilovric/DeepFakeGen/tree/main/styleclip/results)
