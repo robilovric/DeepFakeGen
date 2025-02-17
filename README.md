@@ -11,7 +11,7 @@ StyleGAN2 and 3 can achieve **very high-resolution images**, but they struggle w
 | ![Image C](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6402.png) | ![Image D](https://github.com/robilovric/DeepFakeGen/blob/main/stylegan3/results/seed6401.png) |
 
 - **Image A**: Demonstrates the abstract backgrounds usually associated with a GAN-generated image and other deviations.
-- **Image B**: Exhibits issues that earrings often present for GANs. GANs sometimes have problems with symmetry, particularly earrings.
+- **Image B**: Shows distorted output, GANs sometimes have big problems with symmetry.
 - **Image C**: Exhibits issues that earrings often present for GANs and contains an abstract background. 
 - **Image D**: Contains secondary image and other distorted details.
 
@@ -29,19 +29,23 @@ Attempt to project real images into latent space, but may **lose fine details or
 
 ### Inversion Steps
 
-| ![Image good inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/affleck.jpg) | ![Image bad inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/kerum2.jpg) |
-|---|---|
-| **Left: A well-inverted image.** The face closely matches the dataset's expected format, leading to an accurate reconstruction. | **Right: A poorly inverted image.** The original does not align well with the training data, causing distortions. |
+| ![Image good inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/affleck.jpg) |
+|---|
+| **A well-inverted image.** The face closely matches the dataset's expected format, leading to an accurate reconstruction. |
+| ![Image bad inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/kerum2.jpg) |
+| **A poorly inverted image.** The original does not align well with the training data, causing distortions. |
 
 ### **Why Inversion Struggles in Some Cases**
 - **Mismatch with training data:** GANs and diffusion models are trained mostly on **cropped, centered face images**. When given an image with a **different pose, lighting, or visible torso**, the inversion process struggles to map it correctly into latent space.  
 - **Information loss:** Since the generator was never trained to reconstruct full-body or off-center images, it **hallucinates missing details**, often leading to **unnatural distortions**.  
 - **Latent space constraints:** The model forces all inputs into a specific **512-dimensional latent representation**, which may not fully capture the complexity of real-world images outside its dataset.  
 
+| ![Image good inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/kerum-inverted.png) |
+|---|
+| This image shows the **original image** after exiting the **alignment process**, the output is then used to finalize **inversion process** and get the inverted image. |
 | ![Image good inversion](https://github.com/robilovric/DeepFakeGen/blob/main/styleclip/results/kerum-manipulated.png) |
 |---|
-
-This image shows a **well-aligned face** that successfully passed the **inversion process**. The **inverted image** is now **treated as the original** for all further manipulations.  
+| This image shows a **well-aligned face** that successfully passed the **inversion process**. The **inverted image** is now **treated as the original** for all further manipulations. |
 
 ## [More Results](https://github.com/robilovric/DeepFakeGen/tree/main/styleclip/results)
 
@@ -56,7 +60,7 @@ It excels at **text-guided image generation**, producing diverse and high-qualit
 
 | ![Image A](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/results/1926283858.png) | ![Image B](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/results/3825872414.png) |
 |---|---|
-| ![Image C](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/results/1795594041.png)) | ![Image D](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/results/3901221944.png) |
+| ![Image C](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/results/1795594041.png) | ![Image D](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/results/3901221944.png) |
 
 Diffusion models excel at generating **highly detailed and realistic images**, often surpassing GANs in fine texture reproduction and global coherence. Their **iterative denoising process** allows for intricate details, smooth shading, and natural variations, making them particularly effective for **photo-realistic portraits and complex scenes**. However, while diffusion shines in **capturing texture and lighting**, it may struggle with **spatial consistency**—sometimes introducing distortions in object structure or logical coherence. Unlike GANs, which can suffer from **mode collapse**, diffusion models provide greater diversity in outputs, making them powerful tools for **high-quality image synthesis and controlled transformations**.
 
@@ -126,6 +130,7 @@ Both GANs and diffusion models have revolutionized image generation, but the nex
     year      = {2021},
     pages     = {2085-2094}
 }
+
 @InProceedings{Rombach_2022_CVPR,
     author    = {Rombach, Robin and Blattmann, Andreas and Lorenz, Dominik and Esser, Patrick and Ommer, Bj\"orn},
     title     = {High-Resolution Image Synthesis With Latent Diffusion Models},
