@@ -50,6 +50,35 @@ Attempt to project real images into latent space, but may **lose fine details or
 
 ---
 
+## [CycleGAN](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/CycleGAN.ipynb)  
+
+CycleGAN is a **Generative Adversarial Network (GAN)** designed for **image-to-image translation** without requiring **paired training data**. Unlike traditional supervised methods that need corresponding image pairs (e.g., a horse and its exact zebra version), CycleGAN learns to **map one domain to another using only unpaired images**.  
+
+Before CycleGAN, most image-to-image translation models relied on **large datasets with paired examples** (e.g., Pix2Pix). However, in many real-world scenarios, obtaining such paired data is **expensive or impractical**.  
+
+CycleGAN introduces a **cycle consistency loss** to ensure that an image translated from domain **A to B** can be **converted back to A** while preserving its original structure. This **bidirectional mapping** ensures that transformations remain faithful to the source image.  
+
+### **Key Features**  
+- **Unpaired Image-to-Image Translation**: No need for perfectly aligned training pairs.  
+- **Cycle Consistency**: Ensures the model does not introduce arbitrary distortions.  
+- **Preserves Content**: Maintains the structure of input images while modifying style.  
+- **Applications**: Style transfer, domain adaptation, artistic rendering, medical imaging, and more.   
+
+### Results & Observations
+By eliminating the need for paired data and **ensuring structure-preserving transformations**, CycleGAN has become a powerful tool for **unsupervised image translation**, significantly expanding the possibilities of generative AI.
+
+| ![Image Input](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/results/n02381460_140_real.png) |  
+|---|  
+| **Input Image**: A real image of horses in the wild. |  
+
+| ![Image Output](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/results/n02381460_140_fake.png) |  
+|---|  
+| **Output Image**: The same scene, but the horses have been transformed into zebras. Domain translation from horses to zebras. |  
+
+## [More Results](https://github.com/robilovric/DeepFakeGen/tree/main/cyclegan/results)
+
+---
+
 ## [Stable Diffusion: Robust Text-to-Image Generation](https://github.com/robilovric/DeepFakeGen/blob/main/stablediffusion/StableDiffusion.ipynb)
 
 Stable Diffusion takes a **different approach**, using diffusion models for **prompt-driven image synthesis**. Unlike GANs, it iteratively refines **random noise into a coherent image**. 
@@ -69,13 +98,27 @@ Diffusion models excel at generating **highly detailed and realistic images**, o
 
 ## GANs vs. Diffusion Models
 
-| Feature | GANs | Diffusion Models |
+| **Feature**           | **CycleGAN**                                                                                               | **StyleGAN2 & 3**                                                                                               | **Stable Diffusion**                                                                                               |
+|-----------------------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **Objective**         | Unpaired image-to-image translation                                                                        | High-quality image synthesis from latent space                                                                | Text-to-image generation                                                                                           |
+| **Training Data**     | Unpaired images                                                                                           | Large datasets of real images                                                                                | Text-image pairs                                                                                                   |
+| **Latent Space**      | No explicit latent space; operates directly on images                                                     | Operates in W and W+ spaces                                                                                   | Utilizes a diffusion process in latent space                                                                       |
+| **Image Fidelity**    | Effective for style and texture transformations; may struggle with fine details and structural consistency | Produces sharp, coherent images with fine details; may face challenges with diversity                         | Generates highly detailed images; quality depends on prompt specificity                                            |
+| **Control**           | Direct domain mapping                                                                                     | Latent vector manipulation allows fine-grained control over image attributes                                  | Control through textual prompts and conditioning                                                                   |
+| **Generalization**    | Limited to transformations between trained domains                                                        | Excels in generating variations within the training data distribution                                         | Generalizes well across various styles and concepts                                                                |
+| **Training Stability**| Generally stable due to cycle-consistency loss                                                            | Requires careful tuning to prevent issues like mode collapse                                                  | More stable training dynamics                                                                                      |
+| **Inference Speed**   | Fast due to direct image transformation                                                                   | Fast image generation from latent vectors                                                                     | Slower due to iterative denoising process                                                                          |
+| **Diversity**         | May produce limited diversity if not properly regularized                                                 | Can suffer from mode collapse, leading to less diverse outputs                                                | Capable of producing a wide range of diverse images                                                                |
+| **Editability**       | Limited to learned transformations between domains                                                        | High editability through latent space manipulations                                                           | Editing involves modifying textual prompts or conditioning inputs                                                  |
+| **Text-Guided Generation** | Not natively supported; requires additional models for text guidance                                 | Not natively supported; extensions like StyleCLIP enable text-based control                                   | Natively supports text-to-image generation through prompt inputs                                                   |
+
+<!-- | Feature | GANs | Diffusion Models |
 | --- | --- | --- |
 | **Training Stability** | Requires careful tuning | More stable |
 | **Image Quality** | High-resolution, but artifacts possible | High-quality and consistent |
 | **Diversity** | Limited due to mode collapse | High diversity |
 | **Editability** | Strong with latent vector manipulation | Less flexible but powerful |
-| **Text-Guided Generation** | StyleCLIP enables text control | Natively supports text prompts |
+| **Text-Guided Generation** | StyleCLIP enables text control | Natively supports text prompts | -->
 
 # Final Thoughts on GANs and Diffusion Models
 
