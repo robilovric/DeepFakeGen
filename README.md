@@ -67,13 +67,10 @@ CycleGAN introduces a **cycle consistency loss** to ensure that an image transla
 ### Results & Observations
 By eliminating the need for paired data and **ensuring structure-preserving transformations**, CycleGAN has become a powerful tool for **unsupervised image translation**, significantly expanding the possibilities of generative AI.
 
-| ![Image Input](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/results/n02381460_140_real.png) |  
-|---|  
-| **Input Image**: A real image of horses in the wild. |  
+| ![Image Input](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/results/n02381460_140_real.png) | ![Image Output](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/results/n02381460_140_fake.png) |
+|---|---|
+| **Input Image**: A real image of horses in the wild. | **Output Image**: The same scene, but the horses have been transformed into zebras. |
 
-| ![Image Output](https://github.com/robilovric/DeepFakeGen/blob/main/cyclegan/results/n02381460_140_fake.png) |  
-|---|  
-| **Output Image**: The same scene, but the horses have been transformed into zebras. Domain translation from horses to zebras. |  
 
 ## [More Results](https://github.com/robilovric/DeepFakeGen/tree/main/cyclegan/results)
 
@@ -122,38 +119,47 @@ Diffusion models excel at generating **highly detailed and realistic images**, o
 
 # Final Thoughts on GANs and Diffusion Models
 
-## Overview
-Generative Adversarial Networks (GANs) and Diffusion Models have made significant strides in the field of image synthesis. While GANs offer speed and efficiency, diffusion models excel in generating highly detailed and controllable outputs. Through our evaluations, both approaches have demonstrated strengths and weaknesses, raising an important question: **Should future research focus on leveraging high-quality datasets and specialized training, or should we push toward novel, hybrid methods that redefine image generation altogether?**
+## **Key Findings**  
 
-## Key Findings
-### **GANs: Strengths & Limitations**
-✅ **Speed & Efficiency** – GANs generate images rapidly after training.
-✅ **High-Resolution Outputs** – Well-trained GANs produce photorealistic results.
-❌ **Mode Collapse** – GANs sometimes fail to capture the full diversity of the dataset.
-❌ **Training Instability** – Requires careful hyperparameter tuning and loss balancing.
+### **GANs: Strengths & Limitations**  
+✅ **Speed & Efficiency** – GANs generate images rapidly after training.  
+✅ **High-Resolution Outputs** – Well-trained GANs produce photorealistic results.  
+✅ **Effective Domain Mapping (CycleGAN)** – Enables unpaired image-to-image translation, preserving structural features while modifying style.  
+❌ **Mode Collapse** – GANs sometimes fail to capture the full diversity of the dataset.  
+❌ **Training Instability** – Requires careful hyperparameter tuning and loss balancing.  
+❌ **Limited Text Control** – Unlike diffusion models, GANs struggle with fine-grained text-driven modifications.  
 
-### **Diffusion Models: Strengths & Limitations**
-✅ **Superior Image Quality** – Step-by-step refinement leads to high realism.
-✅ **Better Diversity & Control** – Latent space conditioning enables fine control over outputs.
-❌ **Slow Inference** – Multiple denoising steps make generation slower than GANs.
-❌ **Computationally Expensive** – Requires significant resources for training and inference.
+### **Diffusion Models: Strengths & Limitations**  
+✅ **Superior Image Quality** – Step-by-step refinement leads to high realism.  
+✅ **Better Diversity & Control** – Latent space conditioning enables fine control over outputs.  
+✅ **Robust Generalization** – Works well across different styles, domains, and unseen data.  
+❌ **Slow Inference** – Multiple denoising steps make generation slower than GANs.  
+❌ **Computationally Expensive** – Requires significant resources for training and inference.  
+❌ **Less Effective for Direct Domain Mapping** – Unlike CycleGAN, diffusion models struggle with one-to-one unpaired translations.  
 
-## Future Directions
-### **Path 1: Specialized Training with High-Quality Datasets**
-- Fine-tune models on domain-specific datasets (e.g., medical imaging, artistic style transfer).
-- Improve dataset curation and annotation for richer feature learning.
-- Optimize model architectures to reduce artifacts and bias in generated content.
+## **Future Directions in Generative Models**  
 
-### **Path 2: Knowledge Breakthrough – Bridging GANs & Diffusion**
-- Develop hybrid models that combine GANs' speed with diffusion's controllability.
-- Explore novel architectures beyond current paradigms (e.g., diffusion-powered GANs).
-- Introduce **self-supervised learning** techniques to enhance generalization across tasks.
+## **Path 1: Specialized Training with High-Quality Datasets**  
+- Fine-tune models on **domain-specific datasets** (e.g., **medical imaging, artistic style transfer**) to enhance precision and realism.  
+- Improve **dataset curation and annotation** to enrich feature learning and ensure diverse, high-fidelity outputs.  
+- Optimize **model architectures** to minimize artifacts, reduce bias, and improve the generalization of generated content.  
 
-## Conclusion
-Both GANs and diffusion models have revolutionized image generation, but the next frontier lies in either **perfecting specialized models** through better datasets and training strategies or **breaking new ground** by merging their capabilities into a unified, next-gen generative model. Whether the future leans toward targeted applications or a fundamental shift in generative AI, one thing is clear: the evolution of image synthesis is far from over.
+## **Path 2: The Emergence of Hybrid Approaches**  
+- Previously, the idea of **combining GANs and diffusion models** was seen as a promising future direction. However, recent advancements like **CycleGAN Turbo** and **DuDGAN** demonstrate that this hybridization is already becoming a reality.  
+- These models leverage **GANs' efficiency** while integrating elements of **diffusion models' flexibility**, leading to **faster and more controlled** image synthesis.  
+- Other notable hybrid approaches include:
+  - **CycleGAN-Turbo** ([Paper](https://arxiv.org/abs/2403.12036)) – One-Step Image Translation with Text-to-Image Models
+  - **DuDGAN** ([Paper](https://arxiv.org/abs/2305.14849)) – Improving Class-Conditional GANs via Dual-Diffusion
+  - **Diffusion-GAN** ([Paper](https://arxiv.org/abs/2206.02262)) – A novel approach that blends GAN training with diffusion-based sampling.
 
----
-**Next Steps:** Conduct further experiments on hybrid architectures, dataset augmentation, and model efficiency improvements.
+
+## **Conclusion**  
+The **era of hybrid generative models is already here**. With **img2img turbo, CycleGAN Turbo, Diffusion-GAN, and other emerging techniques**, researchers are successfully blending **GANs' speed** with **diffusion's precision**. The focus must now shift from speculation to **practical improvements and real-world applications**. Instead of merely anticipating the convergence of these models, the next step is to **enhance and scale** these techniques for broader accessibility, stability, and efficiency.  
+
+**Next Steps**  
+- Further **optimize hybrid architectures** to improve performance and consistency.  
+- Investigate **scalability and efficiency** to bring high-quality generative models to real-time applications.  
+- Explore **new training paradigms** that leverage the strengths of both GANs and diffusion models for even greater creative potential.  
 
 
 ## Citations
